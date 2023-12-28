@@ -171,10 +171,12 @@ HAVING Tong_Sinh_Vien_LOP>10;
 -- INNER JOIN DIEMHP as dhp
 -- ON sv.MaSV = dhp.MaSV;
 
-SELECT sv.HoTen , AVG(dhp.DiemHP) as Diem_TB FROM SINHVIEN as sv
+SELECT sv.HoTen ,dmhp.HocKy, AVG(dhp.DiemHP) as Diem_TB FROM SINHVIEN as sv
 INNER JOIN DIEMHP as dhp
 ON sv.MaSV = dhp.MaSV
-GROUP BY sv.MaSV
+INNER JOIN DMHOCPHAN as dmhp 
+ON dmhp.MaHP = dhp.MaHP
+GROUP BY sv.MaSV , dmhp.HocKy
 HAVING Diem_TB < 3;
 
 -- 9. Cho biết HoTen sinh viên có ít nhất 2 học phần có điểm <5.
